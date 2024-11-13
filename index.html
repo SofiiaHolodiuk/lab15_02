@@ -3,43 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Завдання 2</title>
-    <script>
-        function processText() {
-            // Отримуємо введений текст
-            let inputText = document.getElementById('inputText').value;
-            
-            // Розділяємо текст на масив слів
-            let words = inputText.split(/\s+/);
-            let count = 0;
-            
-            // Підраховуємо кількість слів з літерою 'і'
-            words.forEach(word => {
-                if (word.includes('і')) {
-                    count++;
-                }
-            });
-
-            // Поміняти місцями перше і друге слово
-            if (words.length >= 2) {
-                let temp = words[0];
-                words[0] = words[1];
-                words[1] = temp;
-            }
-
-            // Формуємо новий рядок
-            let modifiedText = words.join(' ');
-
-            // Виводимо результат
-            document.getElementById('result').innerText = `Кількість слів з літерою 'і': ${count}\nМодифікований текст: ${modifiedText}`;
-        }
-    </script>
+    <title>Lab 5_2</title>
 </head>
 <body>
-    <h1>Завдання 2</h1>
-    <label for="inputText">Введіть текст: </label>
-    <textarea id="inputText" rows="4" cols="50"></textarea><br><br>
-    <button onclick="processText()">Обробити</button>
-    <pre id="result"></pre>
+    <h2>Аналіз тексту</h2>
+    <label for="inputText">Введіть текст:</label>
+    <textarea id="inputText" rows="4" cols="50" placeholder="Введіть текст тут..."></textarea>
+    <br>
+    <button onclick="analyzeText()">Аналізувати текст</button>
+    
+    <p>Кількість слів довжиною більше 5: <span id="longWordCount">0</span></p>
+    <p>Текст без пробілів між першим і другим словом: <span id="modifiedText"></span></p>
+
+    <script>
+        function analyzeText() {
+            // Отримуємо текст від користувача
+            let text = document.getElementById("inputText").value;
+
+            // Підрахунок кількості слів з довжиною більше 5
+            let words = text.split(" ");
+            let longWords = words.filter(word => word.length > 5);
+            document.getElementById("longWordCount").innerText = longWords.length;
+
+            // Видалення всіх пробілів між першим і другим словом
+            if (words.length > 1) {
+                words[0] = words[0] + words[1]; // Об'єднуємо перше і друге слово без пробілів
+                words.splice(1, 1); // Видаляємо другий елемент, оскільки він вже об'єднаний з першим
+            }
+            let modifiedText = words.join(" ");
+            document.getElementById("modifiedText").innerText = modifiedText;
+        }
+    </script>
 </body>
 </html>
