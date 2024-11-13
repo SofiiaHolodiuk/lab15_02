@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <script>
+        function processText() {
+            // Отримуємо введений текст
+            let inputText = document.getElementById('inputText').value;
+            
+            // Розділяємо текст на масив слів
+            let words = inputText.split(/\s+/);
+            let count = 0;
+            
+            // Підраховуємо кількість слів з літерою 'і'
+            words.forEach(word => {
+                if (word.includes('і')) {
+                    count++;
+                }
+            });
+
+            // Поміняти місцями перше і друге слово
+            if (words.length >= 2) {
+                let temp = words[0];
+                words[0] = words[1];
+                words[1] = temp;
+            }
+
+            // Формуємо новий рядок
+            let modifiedText = words.join(' ');
+
+            // Виводимо результат
+            document.getElementById('result').innerText = `Кількість слів з літерою 'і': ${count}\nМодифікований текст: ${modifiedText}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Завдання 2</h1>
+    <label for="inputText">Введіть текст: </label>
+    <textarea id="inputText" rows="4" cols="50"></textarea><br><br>
+    <button onclick="processText()">Обробити</button>
+    <pre id="result"></pre>
+</body>
+</html>
